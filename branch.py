@@ -7,7 +7,7 @@ db = conn.connect(host="localhost", user="root", password="tiger", autocommit=Tr
 cursor = db.cursor()
 
 '''
-SUBFUNCTIONS OF THE MAIN START HERE
+SUBFUNCTIONS OF THE Game's Branch START HERE
 '''
 
 def game_loop(username):
