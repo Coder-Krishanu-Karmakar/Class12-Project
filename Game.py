@@ -12,7 +12,7 @@ def checkDatabase():
         cursor.execute("CREATE DATABASE guess_the_number")
         cursor.execute("USE guess_the_number")
         cursor.execute("CREATE TABLE users(username char(50) PRIMARY KEY NOT NULL, password char(50) NOT NULL)")
-        cursor.execute("CREATE TABLE scores(username char(50) , score int, date DATE, foreign key(username) references users(username))")
+        cursor.execute("CREATE TABLE scores(username char(50) , score int, date DATE)")
 
 checkDatabase()
 cursor.execute("USE guess_the_number")

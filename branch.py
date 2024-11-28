@@ -72,6 +72,26 @@ def delete_account(username):
     cursor.execute("DELETE FROM users WHERE username = %s", (username,))
     print("Your account is deleted.")
 
+def ChangeUsernamePassword(username):
+    while True:
+        newUsername = input("Enter a new Username: ")
+        cursor.execute("select username from users where username = %s", (newUsername,)) 
+        if (cursor.fetchall() == []) and (not (newUsername.isspace() or newUsername=="")):
+            break
+        else:
+            print("Invalid Username or Username already exists....")
+            continue
+    while True:
+        newPassword = input("Enter a new Password")
+        if newPassword == "" or newPassword.isspace():
+            print("Enter a valid password...")
+        else:
+            break
+
+    cursor.execute("update users set username = %s, password = %s where username = %s", (newUsername,newPassword,username))
+    cursor.execute("update scores set username = %s where username = %s", (newUsername,username))
+    
+
 '''
 SUBFUNCTIONS OF THE MAIN END HERE
 '''
@@ -80,29 +100,35 @@ def main(username):
     while True:
         print("""
         Commands -->
-        start - Start the game
-        score - Show the score
-        highscore - Show the highscore
-        clear_score - Clear the score
-        delete_account - Delete the account
-        exit - Exit the game
+        1 - Start the game
+        2 - Show the score
+        3 - Show the highscore
+        4 - Clear the score
+        5 - Delete the account
+        6 - Change Username and Password
+        7 - Exit the game
         """)
 
         ui = input("Enter your command: ")
 
-        if ui == "start":
+        if ui == "1":
             game_loop(username)
-        elif ui == "score":
+        elif ui == "2":
             score(username)
-        elif ui == "highscore":
+        elif ui == "3":
             highscore(username)
-        elif ui == "clear_score":
+        elif ui == "4":
             clear_score(username)
-        elif ui == "delete_account":
+        elif ui == "5":
             delete_account(username)
             break
-        elif ui == "exit":
+        elif ui == '6':
+            ChangeUsernamePassword(username)
+            print("Data changed, kindly sign in again....")
+            break
+        elif ui == "7":
             print("You are exiting the game.")
+            break
         else:
             print("Invalid command.")
         
